@@ -1,0 +1,20 @@
+tasks:
+  - init: |
+      # Install necessary packages for managing repositories
+      sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
+      
+      # Add the HashiCorp GPG key and repository for Terraform
+      wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+      echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+      
+      # Install Terraform
+      sudo apt-get update && sudo apt-get install -y terraform
+
+      # Add the GitHub CLI GPG key and repository
+      type -p curl >/dev/null || sudo apt-get install curl -y
+      curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+      sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
+      echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+
+      # Install GitHub CLI (gh)
+      sudo apt-get update && sudo apt-get install gh -y
