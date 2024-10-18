@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 # we are going to do only one job here, you can name it how you like  
 jobs:
@@ -23,6 +24,11 @@ jobs:
         shell: bash
 
     steps:
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: ${ROLE_TO_ASSUME}
+        aws-region: eu-west-2
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v4
