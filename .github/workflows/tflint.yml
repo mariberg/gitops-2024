@@ -1,8 +1,8 @@
-name: Lint
+name: Lint # this is an individual job that will run at the same time as the other job
 on:
-  push:
-    branches: [ main ]
   pull_request:
+    branches:
+      - main
 
 jobs:
   tflint:
