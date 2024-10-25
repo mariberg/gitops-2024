@@ -48,4 +48,8 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: terraform -chdir="./terraform" plan -input=false 
+      id: plan
+      run: |
+        terraform plan -out=plan.tfplan
+        terraform show -json plan.tfplan > /tmp/plan.json
+        cat /tmp/plan.json
