@@ -27,7 +27,7 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: ${ROLE_TO_ASSUME}
+        role-to-assume: process.env.ROLE_TO_ASSUME
         aws-region: eu-west-2
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
