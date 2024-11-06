@@ -13,13 +13,14 @@ The general principle of the Pipeline is that creating a pull request will trigg
 
 The way that pipeline is designed means that the infrastructure is always the 'source of truth'. Main branch could be behind as merging the feature branch to the main branch would happen only after successfull infrastructure deployment. 
 
-## Main branch protection
+
+## Pre-requisites
+
+### Main branch protection
 
 The settings for the Github repository should be changed so that it is not possible to push directly to the main branch. Rather the code should always be pushed to a feature branch and a pull request should be created to merge to main.
 
 Merging should also not be possible unless all of the below explain workflows have completed successfully.
-
-## Pre-requisites
 
 ### Backend resources
 
