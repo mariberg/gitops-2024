@@ -35,7 +35,7 @@ The OIDC role is defined with Cloudformation in the 'cfn' directory. You can cre
 ### Pre-commit hook
 
 The purpose of pre-commit hooks is to check your code before you are able to commit it. In this pipeline I create a 
-pre-commit hook that runs 'terraform fmt' in order to make sure that the code is correctly formatted.
+pre-commit hook that runs ```terraform fmt``` in order to make sure that the code is correctly formatted.
 
 The terraform fmt pre-commit hook was set up using this [library](https://github.com/antonbabenko/pre-commit-terraform?tab=readme-ov-file#terraform_fmt). If formatting fails when trying to commit code, it will make changes to the files to format them correctly and you would then need to run git add and git commit again.
 
@@ -51,7 +51,7 @@ The infracost.yml file creates a new job for infracost, which checks the current
 
 ### Plan -workflow
 
-The plan workflow runs again 'Terraform fmt' in order to make sure that it is done, in case you would have some contributors that are not running it in the pre-commit hook. In addition it will run 'terraform validate', which checks for syntax errors and provider schema compliance. The workflow will configure AWS credentials using the OIDC-role and then run 'terraform plan'. It will also set up OPA and run the OPA tests.
+The plan workflow runs again ```Terraform fmt``` in order to make sure that it is done, in case you would have some contributors that are not running it in the pre-commit hook. In addition it will run ```terraform validate```, which checks for syntax errors and provider schema compliance. The workflow will configure AWS credentials using the OIDC-role and then run ```terraform plan```. It will also set up OPA and run the OPA tests.
 
 ### OPA (Open Policy Agent)
 
@@ -67,11 +67,11 @@ tflint.yml file sets up tflint and then runs it. This job is running parallel to
 
 We want these workflows to run only with manual intervention. The easiest way to implement this is my using a dispatch step:
 
-``
+```
 name: 'Apply'
 
 on: workflow_dispatch
-``
+```
 
 With the current set-up you will need to make sure that all of the three workflows that are run after the pull request is created, successfully complete their checks. After that you can go to the GitHub Actions tab, select the 'apply' workflow and manually run it by clicking 'Run workflow'. The same can be done for destroying the resources.
 
