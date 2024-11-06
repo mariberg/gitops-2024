@@ -6,7 +6,7 @@ fully functional GitOps pipeline to deploy AWS infrastructure using Terraform.
 This Terraform project creates a simple Grafana server with related resources such as internet gateway and route table. The purpose of this project is to concentrate on the pipeline and different functionalities that would ensure that the pipeline contains required mechanisms and quardrails to make sure that it will be used as intended.
 
 The structure of this project is summarized in the below diagram:
-!(Gitops_diagram)[assets/gitops_diagram.png]
+![Gitops_diagram](assets/gitops_diagram.png)
 
 
 The general principle of the Pipeline is that creating a pull request will trigger a few separate Github actions worfklows. These will run different validations, check the cost implications and make sure that they follow the set policies. If each of these tests pass, it is possible to move on to the running 'Terraform apply'. This will be done with a separate dispatch step, which means that it needs to be done manually via the Github actions console. This is the easiest way to make sure that there is a human intervention before deployment. Similarly running 'terraform destroy' would need to be triggered manually. 
